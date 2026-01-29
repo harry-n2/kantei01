@@ -1,0 +1,9 @@
+{
+  "name": "palm-reading-slides",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^24.35.0"
+  }
+}

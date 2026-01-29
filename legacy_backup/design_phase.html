@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詳細設計フェーズ - Lark Base Architecture</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            overflow: auto;
+            /* Allow scrolling for this long page */
+            height: auto;
+            padding-bottom: 5rem;
+            background-color: #f4f6f9;
+        }
+
+        main {
+            height: auto;
+            overflow: visible;
+        }
+
+        .design-header {
+            background: linear-gradient(135deg, #003366 0%, #001f3f 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .design-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .schema-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .schema-table th,
+        .schema-table td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schema-table th {
+            background-color: #f4f6f9;
+            color: #003366;
+            font-weight: bold;
+        }
+
+        .logic-card {
+            background: white;
+            border-left: 4px solid #d4af37;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #ccc;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="design-header">
+        <h1 style="color: white; margin-bottom: 1rem;">Detailed Design Phase</h1>
+        <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">Lark Base データベース設計書 & オートメーション仕様</p>
+        <a href="index.html" style="color: #d4af37; text-decoration: none; margin-top: 1rem; display: inline-block;">←
+            プレゼンテーションに戻る</a>
+    </header>
+
+    <main>
+
+        <!-- 1. Database Schema -->
+        <section class="design-section" style="height: auto;">
+            <h2 style="border-bottom: 2px solid #003366; display: inline-block; margin-bottom: 2rem;">1. Database
+                Architecture (DB設計)</h2>
+            <p>3つの主要データベース（Base）のフィールド定義およびリレーション設計の詳細です。</p>
+
+            <!-- Grid changed to Flex for centering 3 items -->
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2rem; justify-content: center;">
+
+                <!-- Client Base -->
+                <div style="flex: 1; min-width: 300px; max-width: 350px;">
+                    <h3
+                        style="background: #003366; color: white; padding: 0.5rem 1rem; border-radius: 4px 4px 0 0; margin-bottom: 0;">
+                        Client Base (顧客台帳)</h3>
+                    <table class="schema-table">
+                        <tr>
+                            <th>フィールド名</th>
+                            <th>タイプ</th>
+                            <th>備考</th>
+                        </tr>
+                        <tr>
+                            <td>顧客ID</td>
+                            <td>自動採番</td>
+                            <td>Unique Key</td>
+                        </tr>
+                        <tr>
+                            <td>氏名</td>
+                            <td>テキスト</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>LINE ID</td>
+                            <td>テキスト</td>
+                            <td>連携用キー</td>
+                        </tr>
+                        <tr>
+                            <td>VIPランク</td>
+                            <td>単一選択</td>
+                            <td>S / A / B / 新規</td>
+                        </tr>
+                        <tr>
+                            <td>生年月日</td>
+                            <td>日付</td>
+                            <td>運勢算出用</td>
+                        </tr>
+                        <tr>
+                            <td>累計売上</td>
+                            <td>計算式</td>
+                            <td>Revenue Baseより集計</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- History Base -->
+                <div style="flex: 1; min-width: 300px; max-width: 350px;">
+                    <h3
+                        style="background: #003366; color: white; padding: 0.5rem 1rem; border-radius: 4px 4px 0 0; margin-bottom: 0;">
+                        History Base (鑑定履歴)</h3>
+                    <table class="schema-table">
+                        <tr>
+                            <th>フィールド名</th>
+                            <th>タイプ</th>
+                            <th>備考</th>
+                        </tr>
+                        <tr>
+                            <td>履歴ID</td>
+                            <td>自動採番</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>関連顧客</td>
+                            <td>片方向リンク</td>
+                            <td>Client Baseと紐付け</td>
+                        </tr>
+                        <tr>
+                            <td>鑑定日</td>
+                            <td>日付</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>相談内容</td>
+                            <td>単一選択</td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td>手相写真</td>
+                            <td>添付ファイル</td>
+                            <td>画像URL</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Revenue Base -->
+                <div style="flex: 1; min-width: 300px; max-width: 350px;">
+                    <h3
+                        style="background: #003366; color: white; padding: 0.5rem 1rem; border-radius: 4px 4px 0 0; margin-bottom: 0;">
+                        Revenue Base (売上管理)</h3>
+                    <table class="schema-table">
+                        <tr>
+                            <th>フィールド名</th>
+                            <th>タイプ</th>
+                            <th>備考</th>
+                        </tr>
+                        <tr>
+                            <td>取引NO</td>
+                            <td>自動採番</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>購入顧客</td>
+                            <td>片方向リンク</td>
+                            <td>Client Baseと紐付け</td>
+                        </tr>
+                        <tr>
+                            <td>商品名</td>
+                            <td>単一選択</td>
+                            <td>鑑定書作成</td>
+                        </tr>
+                        <tr>
+                            <td>金額</td>
+                            <td>通貨</td>
+                            <td>自動入力</td>
+                        </tr>
+                        <tr>
+                            <td>決済日</td>
+                            <td>日付</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. Automation Flows -->
+        <section class="design-section" style="height: auto;">
+            <h2 style="border-bottom: 2px solid #003366; display: inline-block; margin-bottom: 2rem;">2. Automation
+                Logic (自動化フロー)</h2>
+            <p>Lark Flowを用いた主要な自動化プロセスの定義です。</p>
+
+            <!-- Grid for 7 Flows -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+
+                <!-- Flow 1 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ① 新規問合せ対応</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> 新規問合せ受信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> お礼チャット返信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 担当にタスク送信
+                    </div>
+                </div>
+
+                <!-- Flow 2 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ② 新規受注処理</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> 新規受注フォーム受信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 新規ルームへ招待<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 顧客にお礼チャット返信 → 担当に通知
+                    </div>
+                </div>
+
+                <!-- Flow 3 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ③ 請求管理</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Process:</strong> Stripe(API)カード決済URL送信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Goal:</strong> 入金確認
+                    </div>
+                </div>
+
+                <!-- Flow 4 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ④ 作業完了プロセス</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> 作業完了にする<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 担当に納品とアンケート送信のタスク通知<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Update:</strong> ステータス「完了」自動変更
+                    </div>
+                </div>
+
+                <!-- Flow 5 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ⑤ 納品プロセス</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> 納品にする<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 顧客に納品チャット送信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Update:</strong> ステータス「納品完了」自動変更
+                    </div>
+                </div>
+
+                <!-- Flow 6 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ⑥ アンケート送付</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> アンケート送信にする<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 顧客にチャット送信<br>(アンケートURL設定済み)<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Update:</strong> ステータス「アンケート送付完了」自動変更
+                    </div>
+                </div>
+
+                <!-- Flow 7 -->
+                <div class="logic-group"
+                    style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <h4
+                        style="color: #003366; margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;">
+                        ⑦ アフターフォロー</h4>
+                    <div style="font-size: 0.9rem;">
+                        <strong style="color: #d4af37;">Trigger:</strong> 納品20日後<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Action:</strong> 顧客にフォローアップのチャット送信<br>
+                        <div style="text-align: center; color: #ccc; margin: 0.3rem 0;">↓</div>
+                        <strong>Update:</strong> ステータス「フォローアップ完了」自動変更
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

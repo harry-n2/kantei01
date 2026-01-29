@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手相鑑定ビジネスDX構想 - プレゼンテーション</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans JP', sans-serif; background: #0a0a0a; color: #fff; overflow: hidden; }
+
+        .slide-container { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+        .slide {
+            width: 100vw; height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5%;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        .slide.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 2rem; color: #d4af37; }
+        h3 { font-size: 1.8rem; margin-bottom: 1rem; color: #d4af37; }
+        p { font-size: 1.4rem; line-height: 1.8; max-width: 900px; }
+        .subtitle { font-size: 1.6rem; color: #ccc; margin-top: 1rem; }
+
+        .accent { color: #d4af37; }
+        .highlight { background: linear-gradient(transparent 60%, rgba(212,175,55,0.3) 60%); }
+
+        /* Slide 1 */
+        .slide-1 { background: linear-gradient(135deg, #001f3f 0%, #003366 100%); }
+        .slide-1 h1 span { display: block; }
+        .slide-1 .x-mark { font-size: 2rem; margin: 1rem 0; color: #d4af37; }
+
+        /* Slide 2 */
+        .slide-2 { background: #fff; color: #333; text-align: left; padding-left: 10%; }
+        .slide-2 h2 { color: #003366; }
+        .issue-list { list-style: none; margin: 2rem 0; }
+        .issue-list li {
+            padding: 1rem 1.5rem;
+            border-left: 4px solid #d4af37;
+            margin-bottom: 1.5rem;
+            background: #f9f9f9;
+        }
+        .issue-list li strong { color: #003366; font-size: 1.3rem; display: block; margin-bottom: 0.5rem; }
+
+        /* Slide 3 */
+        .slide-3 { background: #f4f6f9; color: #333; }
+        .base-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; max-width: 1000px; }
+        .base-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #003366;
+        }
+        .base-card h3 { color: #003366; font-size: 1.3rem; margin-bottom: 0.8rem; }
+        .base-card p { font-size: 1rem; color: #666; }
+
+        /* Slide 4 */
+        .slide-4 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .ai-features { display: flex; gap: 3rem; margin-top: 2rem; max-width: 1000px; }
+        .ai-feature {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .ai-feature h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .ai-feature p { font-size: 1.1rem; color: #ccc; }
+
+        /* Slide 5 */
+        .slide-5 { background: #fff; color: #333; }
+        .schema-preview { display: flex; gap: 1.5rem; margin: 2rem 0; }
+        .schema-box {
+            background: #003366;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+        .flow-step {
+            background: #f4f6f9;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+        }
+        .flow-arrow { color: #d4af37; font-size: 1.5rem; }
+
+        /* Slide 6 */
+        .slide-6 { background: linear-gradient(135deg, #003366 0%, #001f3f 100%); }
+        .cta-box {
+            background: rgba(255,255,255,0.1);
+            padding: 3rem 4rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 2px solid #d4af37;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+        .nav button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .nav button:hover { background: #d4af37; color: #000; }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+        }
+        .slide-2 .slide-counter, .slide-3 .slide-counter, .slide-5 .slide-counter { color: rgba(0,0,0,0.3); }
+
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+
+    <div class="slide-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-1 active" data-slide="1">
+            <h1>
+                <span>手相鑑定</span>
+                <span class="x-mark">×</span>
+                <span class="accent">Lark Base</span>
+            </h1>
+            <p class="subtitle">属人化からの解放。<br>データが紡ぐ、次世代の鑑定ビジネス。</p>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide slide-2" data-slide="2">
+            <h2>The Chaos of Analog</h2>
+            <p style="color: #666; margin-bottom: 2rem;">現状の課題</p>
+            <ul class="issue-list">
+                <li>
+                    <strong>"記憶"頼りの限界</strong>
+                    「あの人の前回の手相、どうだったっけ？」<br>
+                    紙のカルテを探す時間、曖昧な記憶...信頼の喪失に直結。
+                </li>
+                <li>
+                    <strong>見えない"機会損失"</strong>
+                    最適なタイミングでのフォローアップができない。<br>
+                    LTV（顧客生涯価値）を高めるチャンスを逃し続けている。
+                </li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide slide-3" data-slide="3">
+            <h2 style="color: #003366;">Lark Base Ecosystem</h2>
+            <p style="color: #666;">4つのデータベースが連携し、ビジネスの全容を可視化</p>
+            <div class="base-grid">
+                <div class="base-card">
+                    <h3>Client Base（顧客台帳）</h3>
+                    <p>氏名、LINE ID、VIPランク<br>全DBの親となるマスターデータ</p>
+                </div>
+                <div class="base-card">
+                    <h3>History Base（鑑定履歴）</h3>
+                    <p>鑑定日、結果要約、満足度<br>過去データを即座に呼び出し</p>
+                </div>
+                <div class="base-card">
+                    <h3>Revenue Base（売上管理）</h3>
+                    <p>取引日、単価、担当鑑定士<br>LTV自動計算・リアルタイム可視化</p>
+                </div>
+                <div class="base-card">
+                    <h3>Time Base（予約管理）</h3>
+                    <p>予約日時、カレンダー同期<br>ダブルブッキング完全防止</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: AI -->
+        <div class="slide slide-4" data-slide="4">
+            <h2>AI Integration: <span class="accent">Gemini</span></h2>
+            <p>蓄積された鑑定データは、AIの学習資源となる</p>
+            <div class="ai-features">
+                <div class="ai-feature">
+                    <h3>自動分析アシスト</h3>
+                    <p>過去1,000件のデータを参照し、類似した手相パターンの顧客がどのような人生を歩んだか瞬時に提示</p>
+                </div>
+                <div class="ai-feature">
+                    <h3>メッセージ生成</h3>
+                    <p>鑑定後のお礼メールやステップ配信の内容を顧客の悩みに合わせて自動ドラフト作成</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Architecture -->
+        <div class="slide slide-5" data-slide="5">
+            <h2 style="color: #003366;">Database Architecture</h2>
+            <div class="schema-preview">
+                <div class="schema-box">Client Base<br><small>顧客ID / 氏名 / LINE ID / VIPランク</small></div>
+                <div class="schema-box">History Base<br><small>履歴ID / 鑑定日 / AI分析結果</small></div>
+                <div class="schema-box">Revenue Base<br><small>取引NO / 商品名 / 金額</small></div>
+            </div>
+            <h3 style="color: #003366; margin-top: 2rem;">Automation Flow</h3>
+            <div class="flow-diagram">
+                <div class="flow-step">納品完了</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">20日待機</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">フォローアップ送信</div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide slide-6" data-slide="6">
+            <h2>Next Step</h2>
+            <div class="cta-box">
+                <h3 style="color: #fff; margin-bottom: 1rem;">詳細設計フェーズへ</h3>
+                <p style="color: rgba(255,255,255,0.8);">
+                    要件定義は完了しました。<br>
+                    次のフェーズでは、具体的なデータベース構造と<br>
+                    オートメーションフローの設計に入ります。
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav">
+        <button onclick="prevSlide()">← 戻る</button>
+        <button onclick="nextSlide()">次へ →</button>
+    </div>
+
+    <div class="slide-counter" id="counter">1 / 6</div>
+
+    <script>
+        let current = 1;
+        const total = 6;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > total) n = total;
+            current = n;
+
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+            document.getElementById('counter').textContent = `${n} / ${total}`;
+            document.getElementById('progress').style.width = `${(n / total) * 100}%`;
+        }
+
+        function nextSlide() { showSlide(current + 1); }
+        function prevSlide() { showSlide(current - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+        });
+    </script>
+</body>
+</html>

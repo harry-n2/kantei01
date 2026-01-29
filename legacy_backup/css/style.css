@@ -1,0 +1,263 @@
+:root {
+    --color-bg: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #555555;
+    --color-accent: #003366;
+    /* Navy Blue */
+    --color-accent-gold: #d4af37;
+    /* Elegant Gold for highlights */
+    --color-border: #eeeeee;
+
+    --font-heading: 'Noto Serif JP', serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+
+    --slide-padding: 4vh 6vw;
+    /* Reduced vertical padding */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    overflow: hidden;
+    /* Main scroll handles it */
+    line-height: 1.6;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    padding: var(--slide-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    background-color: var(--color-bg);
+    /* Crucial for preventing overlap visibility */
+    overflow: hidden;
+    /* Prevent content spilling */
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Typography */
+h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--color-accent);
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    z-index: 2;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--color-accent-gold);
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+    max-width: 900px;
+}
+
+/* Layout Compnonents */
+.container {
+    max-width: 1600px;
+    /* Wide layout */
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    height: 80vh;
+}
+
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Base Cards & Grids */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.gallery-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.image-card {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.image-crop-container {
+    width: 100%;
+    height: 180px;
+    background: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Using object-position to show different parts of the same long screenshot */
+.lark-img {
+    width: 300%;
+    /* Zoom in significantly */
+    height: auto;
+    position: absolute;
+    /* Positions defined in inline styles or specific classes */
+}
+
+/* Specific Section Styles */
+
+/* Section 1: Title */
+#title-slide {
+    text-align: center;
+    background: linear-gradient(135deg, #f9fbfd 0%, #eef2f6 100%);
+}
+
+#title-slide .container {
+    align-items: center;
+}
+
+/* Section 2: Challenges */
+.pain-points-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Section 4: Architecture */
+.base-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+/* Section 6: CTA */
+#cta-section {
+    background-color: var(--color-accent);
+    color: white;
+    text-align: center;
+}
+
+#cta-section h2,
+#cta-section p {
+    color: white;
+}
+
+#cta-section h2::after {
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cta-btn {
+    background: white;
+    color: var(--color-accent);
+    padding: 1.5rem 4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+/* Animations - DISABLED for Stability */
+.fade-in {
+    opacity: 1;
+    /* Forcing visibility */
+    transform: none;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (max-width: 1200px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .base-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

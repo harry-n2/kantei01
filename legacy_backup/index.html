@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手相鑑定ビジネスDX構想 - Lark Base Integration</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@600&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main>
+        <!-- Slide 1: Concept / Hero -->
+        <section class="hero-section" style="background: white;">
+            <div class="container split-layout">
+                <div class="hero-content">
+                    <h1 class="main-title" style="color: #003366; font-size: 3.5rem; line-height: 1.2;">
+                        <span class="fade-in-up" style="animation-delay: 0.2s; display: block;">手相鑑定</span>
+                        <span class="fade-in-up"
+                            style="animation-delay: 0.4s; display: block; font-size: 2rem; margin: 0.5rem 0;">×</span>
+                        <span class="fade-in-up" style="animation-delay: 0.6s; display: block;">Lark Base</span>
+                    </h1>
+                    <p class="subtitle fade-in-up"
+                        style="animation-delay: 0.8s; color: #555; font-size: 1.1rem; margin-top: 2rem;">
+                        属人化からの解放。<br>
+                        データが紡ぐ、次世代の鑑定ビジネス。
+                    </p>
+                </div>
+                <!-- Hero Image -->
+                <div class="hero-image-container fade-in" style="animation-delay: 0.4s;">
+                    <img src="img/palm_hero.png" alt="DX Palm Reading"
+                        style="width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Issues -->
+        <section style="background-color: white;">
+            <div class="container">
+                <div class="two-column-layout">
+                    <!-- Left Column: Text -->
+                    <div class="text-column">
+                        <h2>The Chaos of Analog</h2>
+                        <ul class="issue-list" style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 2rem;">
+                                <h3 style="color: #003366; border-left: 4px solid #d4af37; padding-left: 1rem;">
+                                    "記憶"頼りの限界</h3>
+                                <p style="margin-top: 0.5rem; color: #666;">
+                                    「あの人の前回の手相、どうだったっけ？」<br>
+                                    紙のカルテを探す時間、曖昧な記憶...。<br>
+                                    それは、信頼の喪失に直結します。
+                                </p>
+                            </li>
+                            <li style="margin-bottom: 2rem;">
+                                <h3 style="color: #003366; border-left: 4px solid #d4af37; padding-left: 1rem;">
+                                    見えない"機会損失"</h3>
+                                <p style="margin-top: 0.5rem; color: #666;">
+                                    最適なタイミングでのフォローアップができない。<br>
+                                    LTV（顧客生涯価値）を高めるチャンスを<br>
+                                    日々、ドブに捨てているのと同じです。
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Right Column: Visual of Chaos -->
+                    <div class="image-column">
+                        <div class="chaos-visual">
+                            <img src="img/chaos_analog.png" alt="Analog Chaos"
+                                style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Solution (Bases) -->
+        <!-- CHANGED LAYOUT: 2x2 Grid with Horizontal Cards -->
+        <section style="background-color: #f4f6f9; padding: 4rem 5%;">
+            <div class="container" style="max-width: 1400px; margin: 0 auto;">
+                <h2>Lark Base Ecosystem</h2>
+                <p style="margin-bottom: 2rem;">4つのデータベースが連携し、ビジネスの全容を可視化します。</p>
+
+                <div class="base-grid"
+                    style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; align-items: stretch; padding-bottom: 2rem;">
+
+                    <!-- Base 1: Customer (Horizontal) -->
+                    <div class="image-card"
+                        style="display: flex; flex-direction: row; height: 180px; align-items: stretch; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div class="image-crop-container" style="width: 150px; height: 100%; flex-shrink: 0;">
+                            <img src="img/base_list.png" class="mockup-img"
+                                style="object-position: top center; height: 100%;">
+                        </div>
+                        <div style="padding: 1.2rem; flex-grow: 1;">
+                            <h3
+                                style="color: #003366; border-bottom: 2px solid #d4af37; padding-bottom: 0.3rem; display: inline-block; font-size: 1.1rem; margin-bottom: 0.5rem;">
+                                Client Base (顧客台帳)</h3>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #555; line-height: 1.6;">
+                                <strong>管理項目:</strong> 氏名、LINE ID、ランク等。<br>
+                                <strong>機能:</strong> 全DBの親となるマスター。属性別セグメント配信の基盤です。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Base 2: History (Horizontal) -->
+                    <div class="image-card"
+                        style="display: flex; flex-direction: row; height: 180px; align-items: stretch; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div class="image-crop-container" style="width: 150px; height: 100%; flex-shrink: 0;">
+                            <img src="img/base_ai.png" class="mockup-img"
+                                style="object-position: left center; height: 100%;">
+                        </div>
+                        <div style="padding: 1.2rem; flex-grow: 1;">
+                            <h3
+                                style="color: #003366; border-bottom: 2px solid #d4af37; padding-bottom: 0.3rem; display: inline-block; font-size: 1.1rem; margin-bottom: 0.5rem;">
+                                History Base (鑑定履歴)</h3>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #555; line-height: 1.6;">
+                                <strong>管理項目:</strong> 鑑定日、結果要約、満足度。<br>
+                                <strong>機能:</strong> 過去データを即座に呼び出し、変化を提示して信頼性を高めます。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Base 3: Revenue (Horizontal) -->
+                    <div class="image-card"
+                        style="display: flex; flex-direction: row; height: 180px; align-items: stretch; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div class="image-crop-container" style="width: 150px; height: 100%; flex-shrink: 0;">
+                            <img src="img/base_dashboard.png" class="mockup-img"
+                                style="object-position: center; height: 100%;">
+                        </div>
+                        <div style="padding: 1.2rem; flex-grow: 1;">
+                            <h3
+                                style="color: #003366; border-bottom: 2px solid #d4af37; padding-bottom: 0.3rem; display: inline-block; font-size: 1.1rem; margin-bottom: 0.5rem;">
+                                Revenue Base (売上管理)</h3>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #555; line-height: 1.6;">
+                                <strong>管理項目:</strong> 取引日、単価、担当鑑定士。<br>
+                                <strong>機能:</strong> LTV自動計算。売上のリアルタイム可視化で集計作業をゼロ化。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Base 4: Time/Schedule (Horizontal) -->
+                    <div class="image-card"
+                        style="display: flex; flex-direction: row; height: 180px; align-items: stretch; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <div class="image-crop-container" style="width: 150px; height: 100%; flex-shrink: 0;">
+                            <img src="img/base_list.png" class="mockup-img"
+                                style="object-position: bottom center; height: 100%;">
+                        </div>
+                        <div style="padding: 1.2rem; flex-grow: 1;">
+                            <h3
+                                style="color: #003366; border-bottom: 2px solid #d4af37; padding-bottom: 0.3rem; display: inline-block; font-size: 1.1rem; margin-bottom: 0.5rem;">
+                                Time Base (予約管理)</h3>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #555; line-height: 1.6;">
+                                <strong>管理項目:</strong> 予約日時、カレンダー同期キー。<br>
+                                <strong>機能:</strong> 外部サイトと双方向同期し、ダブルブッキングを完全防止します。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: AI & Future -->
+        <section>
+            <div class="container split-layout">
+                <div>
+                    <h2>AI Integration: Gemini</h2>
+                    <p>蓄積された鑑定データは、AIの学習資源となります。</p>
+                    <ul>
+                        <li style="margin-bottom: 2rem;">
+                            <strong style="color: var(--color-accent); font-size: 1.2rem;">自動分析アシスト</strong><br>
+                            過去1,000件のデータを参照し、類似した手相パターンの顧客がどのような人生を歩んだか瞬時に提示。
+                        </li>
+                        <li style="margin-bottom: 2rem;">
+                            <strong style="color: var(--color-accent); font-size: 1.2rem;">メッセージ生成</strong><br>
+                            鑑定後のお礼メールや、ステップ配信の内容を顧客の悩みに合わせて自動ドラフト作成。
+                        </li>
+                    </ul>
+                </div>
+                <!-- Large AI Visual -->
+                <div class="image-card" style="height: 80%; width: 100%;">
+                    <img src="img/base_ai.png" class="mockup-img" style="object-position: center;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: CTA -->
+        <section id="cta-section">
+            <div class="container">
+                <h2>Next Step: Detailed Architecture</h2>
+                <p style="color: rgba(255,255,255,0.9); margin: 0 auto 3rem;">
+                    要件定義は完了しました。<br>
+                    次のフェーズでは、具体的なデータベース構造とオートメーションフローの設計に入ります。
+                </p>
+
+                <div class="gallery-grid"
+                    style="margin-bottom: 4rem; grid-template-columns: repeat(3, 1fr); gap: 2rem; opacity: 1;">
+                    <div class="image-card"
+                        style="height: 200px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="img/cta_arch.png" class="mockup-img"
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="image-card"
+                        style="height: 200px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="img/cta_flow.png" class="mockup-img"
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="image-card"
+                        style="height: 200px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <img src="img/cta_growth.png" class="mockup-img"
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                </div>
+
+                <a href="design_phase.html" class="cta-btn">詳細設計フェーズへ進む</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script for Interactions -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

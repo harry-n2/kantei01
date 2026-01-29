@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git subtree push:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git push:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(start http://localhost:3001/result?age=30)",
+      "Bash(start http://localhost:3002/result?age=30)",
+      "Bash(start http://localhost:3003/result?age=30)",
+      "Bash(start http://localhost:3006/result?age=30)",
+      "Bash(start:*)",
+      "Bash(gh api:*)",
+      "Bash(git fetch:*)"
+    ]
+  }
+}
