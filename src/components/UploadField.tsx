@@ -78,8 +78,8 @@ export const UploadField: React.FC<UploadFieldProps> = ({ label, side, onImageSe
                 {!preview && (
                     <div className="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center p-6">
                         <img
-                            src={side === 'left' ? '/images/hand-left.svg' : '/images/hand-right.svg'}
-                            alt={side === 'left' ? '左手ガイド' : '右手ガイド'}
+                            src={side === 'left' ? import.meta.env.BASE_URL + 'images/hand-left.svg' : import.meta.env.BASE_URL + 'images/hand-right.svg'}
+                            alt=""
                             className="w-full h-full object-contain"
                         />
                     </div>
