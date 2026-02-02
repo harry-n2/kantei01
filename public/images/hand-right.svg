@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" fill="white">
-  <!-- Right hand palm-up: thumb on LEFT side (mirror of left hand) -->
+  <!-- Left hand palm-up: thumb on RIGHT side -->
   <!-- Palm base -->
   <ellipse cx="150" cy="270" rx="95" ry="110" />
-  <!-- Pinky (rightmost) -->
-  <rect x="228" y="100" width="30" height="100" rx="15" transform="rotate(8, 243, 150)" />
+  <!-- Pinky (leftmost) -->
+  <rect x="42" y="100" width="30" height="100" rx="15" transform="rotate(-8, 57, 150)" />
   <!-- Ring finger -->
-  <rect x="186" y="60" width="32" height="120" rx="16" transform="rotate(3, 202, 120)" />
+  <rect x="82" y="60" width="32" height="120" rx="16" transform="rotate(-3, 98, 120)" />
   <!-- Middle finger (tallest) -->
-  <rect x="136" y="40" width="34" height="140" rx="17" />
+  <rect x="130" y="40" width="34" height="140" rx="17" />
   <!-- Index finger -->
-  <rect x="90" y="65" width="32" height="115" rx="16" transform="rotate(-5, 106, 122)" />
-  <!-- Thumb (left side, angled outward) -->
-  <ellipse cx="45" cy="210" rx="22" ry="50" transform="rotate(-30, 45, 210)" />
-  <ellipse cx="28" cy="165" rx="18" ry="35" transform="rotate(-40, 28, 165)" />
+  <rect x="178" y="65" width="32" height="115" rx="16" transform="rotate(5, 194, 122)" />
+  <!-- Thumb (right side, angled outward) -->
+  <ellipse cx="255" cy="210" rx="22" ry="50" transform="rotate(30, 255, 210)" />
+  <ellipse cx="272" cy="165" rx="18" ry="35" transform="rotate(40, 272, 165)" />
 </svg>
