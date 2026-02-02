@@ -76,10 +76,12 @@ export const UploadField: React.FC<UploadFieldProps> = ({ label, side, onImageSe
 
                 {/* Hand Guide Overlay (Only when no image) */}
                 {!preview && (
-                    <div className={`absolute inset-0 opacity-10 pointer-events-none transform ${side === 'left' ? 'scale-x-100' : '-scale-x-100'}`}>
-                        <svg viewBox="0 0 200 300" className="w-full h-full fill-white">
-                            <path d="M100,280 C60,280 40,200 30,150 C20,100 20,50 40,30 C50,20 70,20 80,40 C85,50 85,80 85,80 C85,80 90,40 100,30 C110,20 130,20 140,40 C145,50 145,80 145,80 C145,80 150,50 160,40 C170,30 190,40 190,70 C190,100 170,180 140,280 Z" />
-                        </svg>
+                    <div className="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center p-6">
+                        <img
+                            src={side === 'left' ? '/images/hand-left.svg' : '/images/hand-right.svg'}
+                            alt={side === 'left' ? '左手ガイド' : '右手ガイド'}
+                            className="w-full h-full object-contain"
+                        />
                     </div>
                 )}
             </div>
