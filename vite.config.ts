@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
     plugins: [react()],
-    base: "/kantei01/",
+    base: process.env.GITHUB_PAGES ? "/kantei01/" : "/",
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
