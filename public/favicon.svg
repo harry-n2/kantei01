@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <g fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- palm -->
+    <path d="M20 40 C18 30 20 22 24 22 C26 22 26 26 26 30 L26 20 C26 17 30 17 30 20 L30 29 L30 18 C30 15 34 15 34 18 L34 29 L34 21 C34 18 38 18 38 21 L38 32 C40 28 44 27 44 31 C44 38 42 44 36 48 C30 52 22 50 20 40 Z"/>
+  </g>
+  <circle cx="46" cy="18" r="2.5" fill="#FCD34D"/>
+  <circle cx="52" cy="26" r="1.6" fill="#FCD34D"/>
+</svg>
