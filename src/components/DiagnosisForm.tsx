@@ -3,11 +3,13 @@ import { UploadField } from './UploadField';
 import { PrivacyPolicy } from './PrivacyPolicy';
 import { Button } from './ui/Button';
 import { Spacer } from './ui/Spacer';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, KeyRound, ExternalLink, Eye, EyeOff } from 'lucide-react';
 import type { DiagnosisInput, Sex } from '@/types/kantei';
 
+const AI_STUDIO_URL = 'https://aistudio.google.com/app/apikey';
+
 type DiagnosisFormProps = {
-    onSubmit: (input: DiagnosisInput, leftHand: File, rightHand: File, facePhoto: File) => void;
+    onSubmit: (input: DiagnosisInput, leftHand: File, rightHand: File, facePhoto: File, apiKey: string) => void;
 };
 
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -21,6 +23,8 @@ export const DiagnosisForm: React.FC<DiagnosisFormProps> = ({ onSubmit }) => {
     const [leftHand, setLeftHand] = useState<File | null>(null);
     const [rightHand, setRightHand] = useState<File | null>(null);
     const [facePhoto, setFacePhoto] = useState<File | null>(null);
+    const [apiKey, setApiKey] = useState('');
+    const [showKey, setShowKey] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [policyOpen, setPolicyOpen] = useState(false);
     const [error, setError] = useState('');
@@ -36,6 +40,7 @@ export const DiagnosisForm: React.FC<DiagnosisFormProps> = ({ onSubmit }) => {
         leftHand !== null &&
         rightHand !== null &&
         facePhoto !== null &&
+        apiKey.trim() !== '' &&
         agreed;
 
     const handleSubmit = () => {
@@ -49,6 +54,7 @@ export const DiagnosisForm: React.FC<DiagnosisFormProps> = ({ onSubmit }) => {
             leftHand as File,
             rightHand as File,
             facePhoto as File,
+            apiKey.trim(),
         );
     };
 
@@ -124,6 +130,43 @@ export const DiagnosisForm: React.FC<DiagnosisFormProps> = ({ onSubmit }) => {
                             ご入力情報と画像は鑑定書の作成とLINEでのご案内に利用し、
                             <span className="text-text-main">72時間以内に自動削除</span>します。第三者へ提供することはありません。
                         </p>
+                    </div>
+
+                    {/* Gemini APIキー（BYOK） */}
+                    <div className="bg-background/60 border border-primary/20 rounded-xl p-5 space-y-3">
+                        <div className="flex items-center gap-2">
+                            <KeyRound size={16} className="text-primary" />
+                            <p className="text-text-main text-sm font-bold">Gemini APIキー<span className="text-primary ml-1">必須</span></p>
+                        </div>
+                        <p className="text-text-muted text-xs leading-relaxed">
+                            鑑定にはGoogleの無料AI「Gemini」を使います。下のボタンから無料のキーを取得し、貼り付けてください（1分ほどで完了します）。
+                        </p>
+                        <ol className="text-text-muted text-xs leading-relaxed list-decimal pl-5 space-y-1">
+                            <li>下のボタンで「Google AI Studio」を開く（無料・Googleアカウントが必要）</li>
+                            <li>「Create API key（APIキーを作成）」を押す</li>
+                            <li>表示された <span className="text-text-main font-medium">AIza… で始まる文字列</span> をコピー</li>
+                            <li>下の欄に貼り付け</li>
+                        </ol>
+                        <a href={AI_STUDIO_URL} target="_blank" rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-primary text-sm font-bold underline decoration-primary/40">
+                            Google AI Studio でキーを取得（無料）<ExternalLink size={14} />
+                        </a>
+                        <div className="relative">
+                            <input
+                                type={showKey ? 'text' : 'password'}
+                                value={apiKey}
+                                onChange={(e) => setApiKey(e.target.value)}
+                                placeholder="AIza... を貼り付け"
+                                autoComplete="off"
+                                spellCheck={false}
+                                className={inputClass + ' pr-11 font-mono'}
+                            />
+                            <button type="button" onClick={() => setShowKey((v) => !v)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white" aria-label="キーの表示切替">
+                                {showKey ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
+                        <p className="text-[11px] text-text-muted/80">入力したキーはこの鑑定のためだけに使用し、保存しません。</p>
                     </div>
 
                     {/* 同意 */}

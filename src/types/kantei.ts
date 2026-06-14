@@ -18,6 +18,7 @@ export type DiagnosisRequest = DiagnosisInput & {
     leftImage: ImagePayload;     // 左手（本質・内面）
     rightImage: ImagePayload;    // 右手（現在・社会面）
     faceImage: ImagePayload;     // 顔（人相・正面）
+    apiKey: string;              // ユーザー自身のGemini APIキー（BYOK・保存しない）
 };
 
 export type ImagePayload = {

@@ -39,11 +39,11 @@ const App = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const handleSubmit = async (input: DiagnosisInput, leftHand: File, rightHand: File, facePhoto: File) => {
+    const handleSubmit = async (input: DiagnosisInput, leftHand: File, rightHand: File, facePhoto: File, apiKey: string) => {
         setStatus('analyzing');
         setErrorMsg('');
         try {
-            const data = await requestDiagnosis(input, leftHand, rightHand, facePhoto);
+            const data = await requestDiagnosis(input, leftHand, rightHand, facePhoto, apiKey);
             setResult(data);
             setStatus('result');
         } catch (e) {

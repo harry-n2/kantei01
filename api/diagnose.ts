@@ -183,12 +183,6 @@ export default async function handler(req: ReqLike, res: ResLike) {
         return;
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-        res.status(500).json({ error: 'サーバー設定エラー（APIキー未設定）。管理者にお問い合わせください。' });
-        return;
-    }
-
     const fwd = req.headers['x-forwarded-for'];
     const ip = (Array.isArray(fwd) ? fwd[0] : fwd)?.split(',')[0]?.trim() || 'unknown';
     if (rateLimited(ip)) {
@@ -206,10 +200,17 @@ export default async function handler(req: ReqLike, res: ResLike) {
     const leftImage = body.leftImage as { mimeType?: string; data?: string } | undefined;
     const rightImage = body.rightImage as { mimeType?: string; data?: string } | undefined;
     const faceImage = body.faceImage as { mimeType?: string; data?: string } | undefined;
+    // BYOK: ユーザー自身のGemini APIキー。保存・ログ出力しない。env はフォールバック。
+    const apiKey = String(body.apiKey || '').trim() || process.env.GEMINI_API_KEY || '';
 
     if (!fullName || !birthdate || !sex || !area || !job || !Number.isFinite(age) ||
         !leftImage?.data || !rightImage?.data || !faceImage?.data) {
         res.status(400).json({ error: '入力が不足しています。すべての必須項目と手相・顔写真をご確認ください。' });
+        return;
+    }
+
+    if (!apiKey) {
+        res.status(400).json({ error: 'Gemini APIキーが入力されていません。案内に従って取得・入力してください。' });
         return;
     }
 
@@ -261,7 +262,13 @@ export default async function handler(req: ReqLike, res: ResLike) {
     if (!geminiRes.ok) {
         const detail = await geminiRes.text().catch(() => '');
         console.error('[diagnose] Geminiエラー', geminiRes.status, detail);
-        res.status(502).json({ error: '鑑定の生成に失敗しました。時間をおいて再度お試しください。' });
+        if ([400, 401, 403].includes(geminiRes.status)) {
+            res.status(400).json({ error: 'Gemini APIキーが正しくない可能性があります。キーを再確認して入力してください。' });
+        } else if (geminiRes.status === 429) {
+            res.status(429).json({ error: 'APIの利用上限に達した可能性があります。少し時間をおいて再度お試しください。' });
+        } else {
+            res.status(502).json({ error: '鑑定の生成に失敗しました。時間をおいて再度お試しください。' });
+        }
         return;
     }
 

@@ -51,6 +51,7 @@ export async function requestDiagnosis(
     leftHand: File,
     rightHand: File,
     facePhoto: File,
+    apiKey: string,
 ): Promise<KanteiResultData> {
     const age = calcAge(input.birthdate);
     const [leftImage, rightImage, faceImage] = await Promise.all([
@@ -62,7 +63,7 @@ export async function requestDiagnosis(
     const res = await fetch('/api/diagnose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...input, age, leftImage, rightImage, faceImage }),
+        body: JSON.stringify({ ...input, age, leftImage, rightImage, faceImage, apiKey: apiKey.trim() }),
     });
 
     if (!res.ok) {
