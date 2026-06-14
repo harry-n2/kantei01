@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Camera, Upload, X } from 'lucide-react';
+import { Camera, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 type UploadFieldProps = {
     label: string;
-    side: 'left' | 'right';
+    side: 'left' | 'right' | 'face';
     onImageSelect: (file: File | null) => void;
 };
 
@@ -74,13 +74,14 @@ export const UploadField: React.FC<UploadFieldProps> = ({ label, side, onImageSe
                     </div>
                 )}
 
-                {/* Hand Guide Overlay (Only when no image) */}
-                {!preview && (
+                {/* Guide Overlay (左右の手のみ・画像が無ければ非表示) */}
+                {!preview && side !== 'face' && (
                     <div className="absolute inset-0 opacity-15 pointer-events-none flex items-center justify-center p-6">
                         <img
                             src={side === 'left' ? import.meta.env.BASE_URL + 'images/hand-left.svg' : import.meta.env.BASE_URL + 'images/hand-right.svg'}
                             alt=""
                             className="w-full h-full object-contain"
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         />
                     </div>
                 )}
